@@ -1,0 +1,213 @@
+// Pardon the hackyness
+
+/*
+ *
+ * Team Room Top Bar(s)
+ *
+ */
+
+.teamroom #top-bar, /* main navigation */
+.teamroom .collapsed-header + .header, /* teammebers and charts */
+.teamroom .scroll, /* Panels */
+.teamroom .caption, /* Storyboard refresh */
+.teamroom .hide-header, /* collapse */
+.teamroom .filter-by-anything, /* filters */
+.teamroom .KanbanBoard .titlebar /* Highlight owner */
+{
+    display:none !important;
+}
+
+/* storyboard position */
+.teamroom .panel-wrapper {
+	top: 0 !important;
+}
+
+/* sticky header position */
+.teamroom .sticky-group-by-header.position-absolute {
+    
+}
+
+/* gap */
+.teamroom .board {
+    margin: 0 !important;
+}
+
+/* easy S-1234 select */
+.teamroom .number {
+    user-select: all;
+    cursor: pointer;
+}
+
+.teamroom table {
+   background-color: #162228 !important;
+}
+
+.teamroom .taskboard table {
+    border-spacing: 4px !important;
+}
+/* Column */
+.teamroom .status,
+.rollup-status {
+    background: #263238 !important
+}
+
+.rollup-status {
+    height: 12px !important;
+}
+
+/* Add icon at bottom of column */
+.teamroom .cell-add {
+    background-image: none !important;
+}
+.teamroom .cell-add:before {
+	content: '+';
+    color: #eceff1;
+    font-size: 3rem;
+    cursor: pointer;   
+}
+
+/* swimlanes */
+.teamroom .sticky-group-by-header {
+    border-color: #162228 !important;
+}
+/* swimlanes */
+.teamroom .group-by-header td {
+    background-color: #162228 !important;
+    border-top-color: #162228 !important;
+    color: white !important;
+}
+
+/*
+ *
+ * Card
+ *
+ */
+.teamroom .story-card-container {
+    margin-bottom: 15px !important;
+}
+
+.teamroom .story-card {
+    border-bottom: none !important;
+    background-color: #37474f !important;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12) !important;
+    
+}
+
+.teamroom .story-card .asset-hover,
+.teamroom .story-card .bottom-card-tab,
+.teamroom .group-by-header td,
+.teamroom .story-card .tag-holder a,
+.teamroom .story-card .story-card-actions, 
+.teamroom .story-card .aging {
+    color: #eceff1 !important;
+}
+
+.teamroom .story-card + .bottom-card-tab {
+    background-color: #37474f !important;
+    border-bottom: none !important;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12) !important; 
+}
+
+.teamroom .story-card .identity-right,
+.teamroom .story-card .identity-left .number {
+    background-color: #162228 !important;
+}
+
+.teamroom .story-card .identity-left .number:before,
+.teamroom .story-card .identity-right:before {
+    border-color: #162228 #162228 transparent transparent !important;
+}
+
+.teamroom .story-card .identity-left .number:after {
+ border-color: #162228 transparent transparent #162228 !important;   
+}
+
+.teamroom .story-card .tag-holder {
+    background-color: #263238 !important;
+}
+/*
+ *
+ * Details Modal
+ *
+ */
+
+/* reposition details modal */
+.inline-asset-detail {
+    top: 0;
+    bottom: 0;
+    left: 50px;
+    right: 0;
+}
+
+.inline-asset-detail .toolbar {
+    height: 0px;
+    overflow: hidden;
+}
+
+.inline-asset-edit .toolbar .title-id {
+	position: fixed;
+    top: 0px;
+    left: 76px;
+    z-index: 2;
+    color: black !important;
+}
+
+.asset-summary .toolbar h2 {
+	user-select: all !important;
+}
+
+.asset-summary .toolbar .icon {
+	visibility: hidden !important;
+}
+
+.side-panel {
+    top: 0 !important;
+}
+
+/* color action dropdon */
+.inline-asset-detail .asset-actions.tab-button {
+    padding: 0 !important;
+    background-color: #00a9e0 !important;
+}
+
+/* quick action "edit" button */
+.inline-asset-detail .tab-buttons .quick-action-text {
+    display: none;
+}
+
+.inline-asset-detail .action-menu-button {
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Unwanted fields */
+.inline-asset-detail .custom-fields,
+.inline-asset-detail .layout-left .other-extended-fields,
+.inline-asset-detail .tabbar .tabs {
+    display: none !important;
+}
+
+/* open in tab link */
+.inline-asset-detail .pop-out {
+    position: fixed;
+    bottom: 0;
+    left: 50px;
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    z-index: 2;
+    background-size: auto;
+    background-position: center;
+    background-color: darkslategrey;
+}
+
+/*Grid*/
+.grid .gridtable [_v1_updater="Test.Name"],
+.grid .gridtable [_v1_updater="Story.Name"],
+.grid .gridtable [_v1_updater="Epic.Name"]
+{
+    width: 35em !important;
+}
