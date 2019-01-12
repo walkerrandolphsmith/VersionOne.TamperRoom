@@ -1,5 +1,3 @@
-// Pardon the hackyness
-
 /*
  *
  * Team Room Top Bar(s)
@@ -7,19 +5,26 @@
  */
 
 .teamroom #top-bar, /* main navigation */
-.teamroom .collapsed-header + .header, /* teammebers and charts */
 .teamroom .scroll, /* Panels */
 .teamroom .caption, /* Storyboard refresh */
 .teamroom .hide-header, /* collapse */
 .teamroom .filter-by-anything, /* filters */
-.teamroom .KanbanBoard .titlebar /* Highlight owner */
+.teamroom .KanbanBoard .titlebar, /* Highlight owner */
+.teamroom .navigation
 {
     display:none !important;
+}
+
+/* teammebers and charts */
+.teamroom .collapsed-header + .header {
+    height: 0;
+    overflow: hidden;
 }
 
 /* storyboard position */
 .teamroom .panel-wrapper {
 	top: 0 !important;
+    margin-left: 42px;
 }
 
 /* sticky header position */
@@ -38,7 +43,9 @@
     cursor: pointer;
 }
 
-.teamroom table {
+body.ultimate,
+.teamroom table,
+.teamroom .window {
    background-color: #162228 !important;
 }
 
@@ -82,15 +89,60 @@
  * Card
  *
  */
+.more-links {
+    display: flex;
+    align-items: center;
+}
+
+.more-links > *, .more-links img {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.more-links > * {
+ 	margin: 5px;   
+}
+
 .teamroom .story-card-container {
     margin-bottom: 15px !important;
+    position: relative;
 }
 
 .teamroom .story-card {
+    box-shadow: none !important;
     border-bottom: none !important;
     background-color: #37474f !important;
-    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12) !important;
-    
+}
+
+.teamroom .story-card  + .bottom-card-tab {
+
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 2px;
+}
+
+.teamroom .story-card + .bottom-card-tab .multibar {
+    width: 100%;
+    height: 2px;
+    border-radius: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+}
+
+.teamroom .story-card  + .bottom-card-tab img {
+	width: 100% !important;
+    height: 2px;
+    position: absolute;
+    top: 0;
 }
 
 .teamroom .story-card .asset-hover,
@@ -119,7 +171,7 @@
 }
 
 .teamroom .story-card .identity-left .number:after {
- border-color: #162228 transparent transparent #162228 !important;   
+ 	border-color: #162228 transparent transparent #162228 !important;   
 }
 
 .teamroom .story-card .tag-holder {
@@ -210,4 +262,195 @@
 .grid .gridtable [_v1_updater="Epic.Name"]
 {
     width: 35em !important;
+}
+
+/* shift board over to show team members */
+.teamroom .window {
+   width: calc(100% - 42px) !important;   
+}
+
+/* All members filter */
+.teamroom .mascot-wrapper {
+ 	position: fixed;
+    left: 4px;
+    top: 24px;
+    width: 32px !important;
+    height: 32px !important;
+}
+
+/* single member filter */
+.teamroom .mascot-wrapper img {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.teamroom .persona-filters .owner-list ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 42px;
+    margin: 0;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.teamroom .persona-filters .owner-list ul:hover {
+ 	overflow: auto !important;   
+}
+
+.teamroom .persona-filters .owner-list ul li {
+	margin-right: 0 !important;
+}
+
+/* scollbars */
+.teamroom .board {
+    height: 100vh !important;
+}
+
+.teamroom .window::-webkit-scrollbar,
+.teamroom .persona-filters .owner-list ul::-webkit-scrollbar {
+    width: 4px;
+    height: 0;
+}
+
+.teamroom .panel-wrapper::-webkit-scrollbar {
+ 	height: 4px;   
+}
+
+.teamroom .panel-wrapper::-webkit-scrollbar-thumb,
+.teamroom .window::-webkit-scrollbar-thumb,
+.teamroom .persona-filters .owner-list ul::-webkit-scrollbar-thumb {
+    background-color: #eceff1;
+}
+
+.teamroom .persona-filters .owner-list ul .name {
+    display: none !important;
+}
+
+.teamroom .panel-wrapper .panels ol li {
+ 	border: none !important;   
+}
+
+
+/*
+ * No data state
+*/
+.teamroom .no-results {
+    color: white;
+    background: #162228;
+    height: 100vh;
+    top: -28px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+
+/**
+
+**/
+.taskboard {
+    table-layout: fixed;
+}
+
+.rollup-status {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/**
+Toggle between list view and board view
+**/
+
+.list-view {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 45px;
+    right: 0;
+    bottom: 0;
+    background: #162228;
+    z-index: 9999; 
+    color: white;
+    overflow-y: scroll;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-view-item {
+    border-bottom: 1px solid white;
+}
+
+.list-view-item .icon {
+ 	width: 32px;
+    height: 32px;
+    margin: 8px;
+    margin-top: 0;
+}
+
+.list-view-item .icon.Story {
+    background: green;
+}
+
+.list-view-item .icon.Defect {
+    background: red;
+}
+
+.list-view a {
+    color: white !important;
+}
+
+.list-view > * {
+    padding: 8px;   
+}
+
+.list-view .number {
+    user-select: all;
+    cursor: pointer;
+}
+
+.toggleListView {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99999999; 
+    background: green;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+#_buildstream > div {
+  padding: 8px;	
+}
+
+#_buildstream > div.success {
+  background: #e3f2e9;	
+}
+
+#_buildstream > div.failure {
+  background: #e6c6c6;	
+}
+
+#_buildstream > div.pending {
+  background: blue;	
 }
