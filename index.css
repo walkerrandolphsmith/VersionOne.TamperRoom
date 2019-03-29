@@ -144,8 +144,17 @@ body.ultimate,
 
 .teamroom .story-card .identity-right,
 .teamroom .story-card .identity-left .number {
-    background-color: #162228 !important;
+    background-color: #162228  !important;
 }
+
+.teamroom .story-card.defect .identity-left .number {
+    background-color: #9a0200 !important;
+}
+
+.teamroom .story-card.story .identity-left .number {
+    background-color: #59a222 !important;
+}
+
 
 .teamroom .story-card .identity-left .number:before,
 .teamroom .story-card .identity-right:before {
