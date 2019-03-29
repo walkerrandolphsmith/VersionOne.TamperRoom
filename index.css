@@ -335,3 +335,9 @@ body.ultimate,
     justify-content: center;
     font-size: 36px;
 }
+
+.super-title {
+    color: antiquewhite;
+    background: #6D09A8;
+    font-size: 80%;
+}
