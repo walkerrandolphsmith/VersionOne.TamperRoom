@@ -168,6 +168,30 @@ body.ultimate,
 .teamroom .story-card .tag-holder {
     background-color: #263238 !important;
 }
+
+/**
+ * DOM injected via tamper monkey
+**/
+.more-links {
+    display: flex;
+    align-items: center;
+}
+
+.more-links > *, .more-links img {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.more-links > * {
+ 	margin: 5px;   
+}
+
+
+
 /*
  *
  * Details Modal
@@ -349,4 +373,19 @@ body.ultimate,
     color: antiquewhite;
     background: #6D09A8;
     font-size: 80%;
+}
+
+
+/**
+* Collapse columns
+**/
+.taskboard {
+    table-layout: fixed;
+}
+
+.rollup-status {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
 }
