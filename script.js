@@ -122,4 +122,56 @@
             })
         });
     });
+
+    $(document).arrive('.KanbanBoard', function() {
+        var typeAttr = '_v1_type';
+        var rankAttr = '_v1_rank';
+        var oidAttr = '_v1_asset';
+
+        var $cards = $('.story-card-container');
+
+        var cards = [];
+
+        $cards.each((index, card) => {
+            var $card = $(card);
+            var type = $card.attr(typeAttr);
+            var rank = $card.attr(rankAttr);
+            var oid = $card.attr(oidAttr);
+            var title = $card.find('.title').html();
+            var number = $card.find('.number').html();
+
+            cards.push({
+                type: type,
+                rank: rank,
+                oid: oid,
+                title: title,
+                number: number,
+            });
+        });
+
+        var sortedCards = cards.sort((prev, next) => prev.rank > next.rank);
+
+
+        var lis = sortedCards.reduce((acc, next) => {
+            return acc + `<div class="list-view-item flex-row">
+<div class="icon ${next.type}"></div>
+  <div class="flex-column">
+    <div>
+     <span class="number">${next.oid}</span>
+     <span class="number">${next.number}</span>
+    </div>
+  <div>${next.title}</div>
+</div>
+</div>`
+        }, '');
+
+        $(document.body).append(`<div class="list-view hidden">${lis}</div>`);
+
+        $(document.body).append('<div class="toggleListView"></div>');
+
+        $('.toggleListView').on('click', function() {
+            $('.list-view').toggleClass('hidden');
+        });
+
+    });
 })();
