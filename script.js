@@ -102,4 +102,24 @@
             });
         });
     });
+
+    var swimlaneSelector = '.group-by-header';
+    $(document).arrive(swimlaneSelector, function() {
+        var $swimlanes = $(swimlaneSelector);
+
+        var isCollapsedByIndex = {};
+        $swimlanes.each((index, element) => {
+            var $swimlaneHeader = $(element);
+            isCollapsedByIndex[index] = false;
+
+            $swimlaneHeader.on('click', function(event) {
+                var $swimlane = $swimlaneHeader.next();
+
+                var nextState = !isCollapsedByIndex[index];
+                isCollapsedByIndex[index] = nextState;
+
+                $swimlane.children().css('display', nextState ? 'none' : 'table-cell');
+            })
+        });
+    });
 })();
