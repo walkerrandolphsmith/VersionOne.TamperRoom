@@ -24,6 +24,7 @@
             },
             "select": [
                 "Super.Name",
+                "Super.Number",
                 {
                     "from": "Super.Attachments",
                     "where": {
@@ -45,6 +46,7 @@
         .then(function (response) {
             const resp = response.data[0][0];
             let superName = resp['Super.Name'];
+            let superNumber = resp['Super.Number'];
             let img = '';
             let dblink = '';
             let paperUrl;
@@ -53,7 +55,7 @@
                 const attachmentId = avatar._oid.substring("Attachment:".length);
                 const filename = avatar.Filename;
                 var url = `/${v1Instance}/attachment.img/${attachmentId}/${filename}`;
-                img = `<img src='${url}' />`;
+                img = `<a href='/${v1Instance}/assetdetail.v1?Number=${superNumber}' target='_blank'><img src='${url}' title='${superName}' /></a>`;
             } catch (e) {
             }
             try {
