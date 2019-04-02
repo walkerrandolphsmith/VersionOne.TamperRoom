@@ -53,7 +53,7 @@
                 const attachmentId = avatar._oid.substring("Attachment:".length);
                 const filename = avatar.Filename;
                 var url = `/${v1Instance}/attachment.img/${attachmentId}/${filename}`;
-                img = `<img src='${url}' />`;
+                img = `<img src='${url}' title='${superName}' />`;
             } catch (e) {
             }
             try {
