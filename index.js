@@ -9,7 +9,6 @@
 // @grant        GM_xmlhttpRequest
 // @require      https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js
 // ==/UserScript==
 (function() {
   "use strict";
@@ -45,16 +44,12 @@
     sidepanelTabs: ".side-panel .tabs"
   };
 
+  function copy() {
+    document.execCommand("copy");
+  }
+
   function initializeCopyToClipboard() {
-    $(selectors.card + " .number").on("click", function(event) {
-      var clipboard = new ClipboardJS(event.currentTarget);
-
-      clipboard.on("success", function(e) {
-        e.clearSelection();
-      });
-
-      clipboard.on("error", function(e) {});
-    });
+    $(selectors.card + " .number").on("click", copy);
   }
 
   function initializeCustomIcons() {
@@ -178,7 +173,7 @@
     });
   }
 
-  function initializeTestView() {
+  function initializeListView() {
     var typeAttr = "_v1_type";
     var rankAttr = "_v1_rank";
     var oidAttr = "_v1_asset";
@@ -317,7 +312,7 @@
   $(document).arrive(selectors.card, initializeCopyToClipboard);
   $(document).arrive(selectors.card, initializeCustomIcons);
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
-  $(document).arrive(selectors.board, initializeTestView);
+  $(document).arrive(selectors.board, initializeListView);
   $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
   $(document).arrive(selectors.columnHeader, initializeCollapsableColumns);
 })();
