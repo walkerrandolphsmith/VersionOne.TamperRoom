@@ -92,6 +92,7 @@ body.ultimate,
 .more-links {
     display: flex;
     align-items: center;
+    background: #37474f;
 }
 
 .more-links > *, .more-links img {
@@ -453,4 +454,17 @@ Toggle between list view and board view
 
 #_buildstream > div.pending {
   background: blue;	
+}
+
+.release-info {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.release-info span {
+    background-color: yellow;
+    padding: 4px;
+    border-color: yellow;
+    border-radius: 8px;
 }

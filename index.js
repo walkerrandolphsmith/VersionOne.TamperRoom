@@ -9,6 +9,7 @@
 // @grant        GM_xmlhttpRequest
 // @require      https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.js
 // ==/UserScript==
 (function() {
   "use strict";
@@ -19,7 +20,8 @@
 
   const config = {
     versionOne: {
-      url: "V1Production"
+      url: "V1Production",
+      queryV1: `/V1Production/query.v1`
     },
     continuum: {
       url: "http://continuum.versionone.co:8080",
@@ -41,7 +43,8 @@
     columnHeader: ".KanbanBoard .rollup-status",
     swimlane: ".group-by-header",
     card: ".story-card-container",
-    sidepanelTabs: ".side-panel .tabs"
+    sidepanelTabs: ".side-panel .tabs",
+    stickyHeader: ".taskboard.sticky-header"
   };
 
   function copy() {
@@ -59,7 +62,7 @@
     const numberEl = story.find(".number");
     const number = numberEl.text().trim();
     axios
-      .post(`/${config.versionOne.url}/query.v1`, {
+      .post(config.versionOne.queryV1, {
         from: "Workitem",
         where: {
           Number: number
@@ -309,10 +312,57 @@
     });
   }
 
+  function initalizeMilestoneBanner() {
+    debugger;
+    const query = `
+            from: Milestone
+            select:
+            - Name
+            - Date
+            - Description
+            where:
+             Scope.Name: VersionOne
+            sort:
+            - -Date
+            page:
+             start: 0
+             size: 1`;
+    try {
+      axios.post(config.versionOne.queryV1, query).then(resp => {
+        const milestone = resp.data[0][0];
+        const desc = milestone.Description;
+        const releaseDate = moment(milestone.Date).format("MM/DD/YYYY");
+        const releaseInfo = `${desc} ${
+          milestone.Name
+        }: <span id='release-counter'></span>`;
+        $(selectors.board)
+          .parent()
+          .prepend(
+            `<div class='release-info'><span>${releaseInfo}</span></div>`
+          );
+        $("#release-counter")
+          .countdown(releaseDate)
+          .on("update.countdown", function(event) {
+            var $this = $(this).html(
+              event.strftime(
+                "" +
+                  "<span>%-w</span> week%!w " +
+                  "<span>%-d</span> day%!d " +
+                  "<span>%H</span> hr " +
+                  "<span>%M</span> min " +
+                  "<span>%S</span> sec"
+              )
+            );
+          });
+      });
+    } catch (e) {}
+  }
+
   $(document).arrive(selectors.card, initializeCopyToClipboard);
   $(document).arrive(selectors.card, initializeCustomIcons);
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
   $(document).arrive(selectors.board, initializeListView);
   $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
   $(document).arrive(selectors.columnHeader, initializeCollapsableColumns);
+  $(document).arrive(selectors.board, initalizeMilestoneBanner);
 })();
