@@ -335,6 +335,7 @@
         const releaseInfo = `${desc} ${
           milestone.Name
         }: <span id='release-counter'></span>`;
+        if ($(".release-info").length > 0) return;
         $(selectors.board)
           .parent()
           .prepend(
