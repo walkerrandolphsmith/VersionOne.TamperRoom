@@ -1,22 +1,20 @@
-(function (root, factory) {
-  if (typeof module === 'object' && module.exports) {
+(function(root, factory) {
+  if (typeof module === "object" && module.exports) {
     // Node/CommonJS
     module.exports = factory();
-  } else if (typeof define === 'function' && define.amd) {
+  } else if (typeof define === "function" && define.amd) {
     // AMD. Register as an anonymous module.
     define(factory);
   } else {
     // Browser globals
     root.tamperRoom = factory();
   }
-}(this, function factory() {
-
-
+})(this, function factory() {
   // public API
   return {
     run: run
   };
-}));
+});
 
 function run(GM_xmlhttpRequest, secrets) {
   "use strict";
@@ -110,7 +108,9 @@ function run(GM_xmlhttpRequest, secrets) {
         var paperLink = paperUrl
           ? `<a href='${paperUrl}' target='_blank'><img src='${paperIcon}' /></a>`
           : "";
-        story.append(`<div class="more-links">${img}${paperLink}</div>`);
+        story
+          .find(".story-card")
+          .append(`<div class="more-links">${img}${paperLink}</div>`);
       })
       .catch(function(error) {
         console.log(error);
@@ -211,15 +211,15 @@ function run(GM_xmlhttpRequest, secrets) {
       return (
         acc +
         `<div class="list-view-item flex-row">
-<div class="icon ${next.type}"></div>
-  <div class="flex-column">
-    <div>
-     <span class="number">${next.oid}</span>
-     <span class="number">${next.number}</span>
-    </div>
-  <div>${next.title}</div>
-</div>
-</div>`
+  <div class="icon ${next.type}"></div>
+    <div class="flex-column">
+      <div>
+       <span class="number">${next.oid}</span>
+       <span class="number">${next.number}</span>
+      </div>
+    <div>${next.title}</div>
+  </div>
+  </div>`
       );
     }, "");
 
@@ -317,18 +317,18 @@ function run(GM_xmlhttpRequest, secrets) {
 
   function initalizeMilestoneBanner() {
     const query = `
-            from: Milestone
-            select:
-            - Name
-            - Date
-            - Description
-            where:
-             Scope.Name: VersionOne
-            sort:
-            - -Date
-            page:
-             start: 0
-             size: 1`;
+              from: Milestone
+              select:
+              - Name
+              - Date
+              - Description
+              where:
+               Scope.Name: VersionOne
+              sort:
+              - -Date
+              page:
+               start: 0
+               size: 1`;
     try {
       axios.post(config.versionOne.queryV1, query).then(resp => {
         const milestone = resp.data[0][0];
@@ -361,11 +361,48 @@ function run(GM_xmlhttpRequest, secrets) {
     } catch (e) {}
   }
 
+  function initializeCardAging() {
+    $(selectors.card).each((index, element) => {
+      var $cardContainer = $(element);
+      var $card = $cardContainer.find(".story-card");
+      var rawText = $cardContainer
+        .find(".advisory")
+        .text()
+        .trim();
+      var lines = rawText.split("\n");
+      var cycleTimeText = lines[lines.length - 1];
+      cycleTimeText = cycleTimeText.replace("Spent ", "");
+      var days = parseInt(cycleTimeText);
+
+      const className = (() => {
+        if (days > 12) return 3;
+        if (days > 5) return 2;
+        if (days > 1) return 1;
+        else return 0;
+      })();
+
+      $card.addClass("aging-pirate");
+      $card.addClass(`aging-level-${className}`);
+    });
+  }
+
+  function initializeCollapsibleCards() {
+    const story = $(this);
+    const aging = story.find(".aging");
+    const toggleDetails = $('<input type="checkbox" />');
+    toggleDetails.on("change", () =>
+      story.find(".title, .bottom-content").toggle()
+    );
+    toggleDetails.insertBefore(aging);
+  }
+
   $(document).arrive(selectors.card, initializeCopyToClipboard);
+  $(document).arrive(selectors.card, initializeCardAging);
   $(document).arrive(selectors.card, initializeCustomIcons);
+  $(document).arrive(selectors.card, initializeCollapsibleCards);
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
   $(document).arrive(selectors.board, initializeListView);
   $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
   $(document).arrive(selectors.columnHeader, initializeCollapsableColumns);
   $(document).arrive(selectors.board, initalizeMilestoneBanner);
-};
+}

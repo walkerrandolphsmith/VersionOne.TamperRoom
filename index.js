@@ -9,34 +9,34 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 (function() {
-	'use strict';
+  "use strict";
 
-	var secrets = {
-		continuum: 'token XXXXXXXXXXXXX',
-	};
+  var secrets = {
+    continuum: "token XXXXXXXXXXXXX"
+  };
 
-	$.ajax(
-		'https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/index.css',
-	).done(r => GM_addStyle(r));
+  $.ajax(
+    "https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/index.css"
+  ).done(r => GM_addStyle(r));
 
-	function addScript(code) {
-		var script = document.createElement('script');
-		script.setAttribute('type', 'text/javascript');
-		script.appendChild(document.createTextNode(code));
-		document.body.appendChild(script);
-	}
+  function addScript(code) {
+    var script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.appendChild(document.createTextNode(code));
+    document.body.appendChild(script);
+  }
 
-	var srcs = [
-		'https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js',
-		'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
-		'https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js',
-		'https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/contents.js',
-	];
+  var srcs = [
+    "https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js",
+    "https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/contents.js"
+  ];
 
-	document.body.onload = function() {
-		Promise.all(srcs.map(src => $.ajax(src))).then(scripts => {
-			scripts.map(script => addScript(script));
-			tamperRoom.run(GM_xmlhttpRequest, secrets);
-		});
-	};
+  document.body.onload = function() {
+    Promise.all(srcs.map(src => $.ajax(src))).then(scripts => {
+      scripts.map(script => addScript(script));
+      tamperRoom.run(GM_xmlhttpRequest, secrets);
+    });
+  };
 })();
