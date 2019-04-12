@@ -1,6 +1,6 @@
 
 
-(function() {
+window.run = function(GM_xmlhttpRequest, secrets) {
   "use strict";
 
   const config = {
@@ -13,7 +13,7 @@
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: "token 56a92be67c1a7c6fa3539409"
+        Authorization: secrets.continuum
       }
     },
     keyCodeByActionType: {
@@ -350,4 +350,4 @@
   $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
   $(document).arrive(selectors.columnHeader, initializeCollapsableColumns);
   $(document).arrive(selectors.board, initalizeMilestoneBanner);
-})();
+};
