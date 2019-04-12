@@ -360,9 +360,18 @@ function run(GM_xmlhttpRequest, secrets) {
       });
     } catch (e) {}
   }
+  
+  function initializeCollapsibleCards() {
+    const story = $(this);
+    const aging = story.find('.aging');
+    const toggleDetails = $('<input type="checkbox" />');
+    toggleDetails.change(e => story.find('.title, .bottom-content').toggle());
+    toggleDetails.insertBefore(aging);
+  }
 
   $(document).arrive(selectors.card, initializeCopyToClipboard);
   $(document).arrive(selectors.card, initializeCustomIcons);
+  $(document).arrive(selectors.card, initializeCollapsibleCards);  
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
   $(document).arrive(selectors.board, initializeListView);
   $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
