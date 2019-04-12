@@ -110,7 +110,9 @@ function dev() {
         var paperLink = paperUrl
           ? `<a href='${paperUrl}' target='_blank'><img src='${paperIcon}' /></a>`
           : "";
-        story.append(`<div class="more-links">${img}${paperLink}</div>`);
+        story
+          .find(".story-card")
+          .append(`<div class="more-links">${img}${paperLink}</div>`);
       })
       .catch(function(error) {
         console.log(error);
@@ -386,9 +388,20 @@ function dev() {
     });
   }
 
+  function initializeCollapsibleCards() {
+    const story = $(this);
+    const aging = story.find(".aging");
+    const toggleDetails = $('<input type="checkbox" />');
+    toggleDetails.on("change", () =>
+      story.find(".title, .bottom-content").toggle()
+    );
+    toggleDetails.insertBefore(aging);
+  }
+
   $(document).arrive(selectors.card, initializeCopyToClipboard);
   $(document).arrive(selectors.card, initializeCardAging);
   $(document).arrive(selectors.card, initializeCustomIcons);
+  $(document).arrive(selectors.card, initializeCollapsibleCards);
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
   $(document).arrive(selectors.board, initializeListView);
   $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
@@ -558,12 +571,11 @@ function addStyles() {
       box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12) !important;
   }
   
-  .teamroom .story-card .identity-right,
-  .teamroom .story-card .identity-left .number {
+  .teamroom .story-card .identity-right
+  {
       background-color: #162228 !important;
   }
   
-  .teamroom .story-card .identity-left .number:before,
   .teamroom .story-card .identity-right:before {
       border-color: #162228 #162228 transparent transparent !important;
   }
