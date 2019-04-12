@@ -1,6 +1,24 @@
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) {
+    // Node/CommonJS
+    module.exports = factory();
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(factory);
+  } else {
+    // Browser globals
+    root.tamperRoom = factory();
+  }
+}(this, function factory() {
 
 
-window.run = function(GM_xmlhttpRequest, secrets) {
+  // public API
+  return {
+    run: run
+  };
+}));
+
+function run(GM_xmlhttpRequest, secrets) {
   "use strict";
 
   const config = {
