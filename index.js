@@ -15,10 +15,6 @@
     continuum: "token XXXXXXXXXXXXX"
   };
 
-  $.ajax(
-    "https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/index.css"
-  ).done(r => GM_addStyle(r));
-
   function addScript(code) {
     var script = document.createElement("script");
     script.setAttribute("type", "text/javascript");
@@ -28,7 +24,6 @@
 
   var srcs = [
     "https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js",
     "https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/contents.js"
   ];

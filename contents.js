@@ -396,6 +396,15 @@ function run(GM_xmlhttpRequest, secrets) {
     toggleDetails.insertBefore(aging);
   }
 
+  GM_xmlhttpRequest({
+    url:
+      "https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/index.css",
+    method: "GET",
+    onload: response => GM_addStyle(response.responseText),
+    synchronous: true,
+    overrideMimeType: "text/html"
+  });
+
   $(document).arrive(selectors.card, initializeCopyToClipboard);
   $(document).arrive(selectors.card, initializeCardAging);
   $(document).arrive(selectors.card, initializeCustomIcons);
