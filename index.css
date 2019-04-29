@@ -492,8 +492,9 @@
    }
 
 .rich-text pre {
+  display: inline-block;
     color: black;
-    border-left: #31363e;
+    border-left: 3px solid #31363e;
     background-color: #fafafa;
     background-image: linear-gradient(rgba(0,0,0,.01) 1px,transparent 1px),linear-gradient(rgba(0,0,0,.01) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.01) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.01) 1px,transparent 1px),linear-gradient(transparent 3px,#fafafa 3px,#fafafa 58px,transparent 58px);
     background-size: 15px 15px,60px 60px,15px 15px,60px 60px,60px 60px,60px 60px; 
