@@ -16,7 +16,7 @@
   };
 });
 
-function run(GM_xmlhttpRequest, secrets) {
+function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
   "use strict";
 
   const config = {
