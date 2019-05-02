@@ -31,7 +31,7 @@
   document.body.onload = function() {
     Promise.all(srcs.map(src => $.ajax(src))).then(scripts => {
       scripts.map(script => addScript(script));
-      tamperRoom.run(GM_xmlhttpRequest, secrets);
+      tamperRoom.run(GM_xmlhttpRequest, GM_addStyle, secrets);
     });
   };
 })();
