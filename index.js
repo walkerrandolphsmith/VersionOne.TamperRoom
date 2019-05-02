@@ -24,6 +24,7 @@
 
   var srcs = [
     "https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js",
     "https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/contents.js"
   ];
