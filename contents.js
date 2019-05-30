@@ -268,10 +268,14 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
       var raw = JSON.parse(response.responseText);
       var builds = raw.Response.map(function(build) {
         var instanceId = build.initiated_by.pi_id;
+        var summary = Object.values(build.summary) || {};
+        var deploymentSummary = summary.find(item => item.label.startsWith('Instance')) || {value: ''}
+        var deploymentUrl = deploymentSummary.value
         return {
-          id: instanceId,
-          href: config.continuum.url + "/flow/pi_detail?id=" + instanceId,
-          status: build.status
+            id: instanceId,
+            href: config.continuum.url + "/flow/pi_detail?id=" + instanceId,
+            deploymentUrl: deploymentUrl,
+            status: build.status
         };
       }).filter(function(build) {
         return Boolean(build.id);
@@ -286,7 +290,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
           next.href +
           '">' +
           next.href +
-          "</a></div>"
+          "</a><br/>" + next.deploymentUrl + "</div>"
         );
       }, "");
 
