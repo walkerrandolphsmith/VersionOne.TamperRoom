@@ -395,7 +395,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
   */
   function initializeCollapsibleCardsToggleInvert() {
     const invertCollapsedCards = $('<input type="checkbox" title="Invert collapsed card selections" />');
-    invertCollapsedCards.on("change", () => {
+    invertCollapsedCards.on('change', () => {
       console.log("we clicked");
       $('.card-toggle').each(() => {
         console.log(this);
@@ -430,12 +430,11 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
   $(document).arrive(selectors.card, initializeCopyToClipboard);
   $(document).arrive(selectors.card, initializeCardAging);
   $(document).arrive(selectors.card, initializeCustomIcons);
-  $(document).arrive(selectors.board, initializeCollapsibleCardsToggleInvert);  
   $(document).arrive(selectors.card, initializeCollapsibleCards);
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
   $(document).arrive(selectors.board, initializeListView);
   $(document).arrive(selectors.swimlanes, initializeCollapsibleSwimlanes);
   $(document).arrive(selectors.columnHeader, initializeCollapsibleColumns);
   $(document).arrive(selectors.board, initalizeMilestoneBanner);
-  
+  $(document).arrive(selectors.board, initializeCollapsibleCardsToggleInvert);  
 }
