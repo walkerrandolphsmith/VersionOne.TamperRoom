@@ -117,7 +117,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
       });
   }
 
-  function initializeCollapsableColumns() {
+  function initializeCollapsibleColumns() {
     const $headers = $(selectors.columnHeader);
     const isCollapsedByIndex = {};
     $headers.each((index, columnHeader) => {
@@ -160,7 +160,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
     });
   }
 
-  function initializeCollapsableSwimlanes() {
+  function initializeCollapsibleSwimlanes() {
     var $swimlanes = $(selectors.swimlane);
 
     var isCollapsedByIndex = {};
@@ -390,10 +390,24 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
     });
   }
 
+  /*
+    Invert collapsed cards so that you can speak to only the items that folks talked about in stand-up
+  */
+  function initializeCollapsibleCardsToggleInvert() {
+    const invertCollapsedCards = $('<button>Invert collapsed cards</button>');
+    invertCollapsedCards.on('click', function () {
+      $('.card-toggle').click();
+    });
+    
+    $(selectors.board)
+      .parent()
+      .prepend(invertCollapsedCards);
+  }
+  
   function initializeCollapsibleCards() {
     const story = $(this);
     const aging = story.find(".aging");
-    const toggleDetails = $('<input type="checkbox" />');
+    const toggleDetails = $('<input type="checkbox" class="card-toggle" />');
     toggleDetails.on("change", () =>
       story.find(".title, .bottom-content").toggle()
     );
@@ -415,7 +429,8 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
   $(document).arrive(selectors.card, initializeCollapsibleCards);
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
   $(document).arrive(selectors.board, initializeListView);
-  $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
-  $(document).arrive(selectors.columnHeader, initializeCollapsableColumns);
+  $(document).arrive(selectors.swimlanes, initializeCollapsibleSwimlanes);
+  $(document).arrive(selectors.columnHeader, initializeCollapsibleColumns);
   $(document).arrive(selectors.board, initalizeMilestoneBanner);
+  $(document).arrive(selectors.board, initializeCollapsibleCardsToggleInvert);  
 }
