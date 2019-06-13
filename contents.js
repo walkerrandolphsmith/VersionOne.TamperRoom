@@ -117,7 +117,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
       });
   }
 
-  function initializeCollapsableColumns() {
+  function initializeCollapsibleColumns() {
     const $headers = $(selectors.columnHeader);
     const isCollapsedByIndex = {};
     $headers.each((index, columnHeader) => {
@@ -160,7 +160,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
     });
   }
 
-  function initializeCollapsableSwimlanes() {
+  function initializeCollapsibleSwimlanes() {
     var $swimlanes = $(selectors.swimlane);
 
     var isCollapsedByIndex = {};
