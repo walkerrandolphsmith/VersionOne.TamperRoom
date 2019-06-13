@@ -394,7 +394,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
     Invert collapsed cards so that you can speak to only the items that folks talked about in stand-up
   */
   function initializeCollapsibleCardsToggleInvert() {
-    const invertCollapsedCards = $('<button class="action-menu-button">Invert collapsed cards</button>');
+    const invertCollapsedCards = $('<button>Invert collapsed cards</button>');
     invertCollapsedCards.on('click', function () {
       $('.card-toggle').click();
     });
