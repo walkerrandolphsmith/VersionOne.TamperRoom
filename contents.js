@@ -395,11 +395,11 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
   */
   function initializeCollapsibleCardsToggleInvert() {
     const invertCollapsedCards = $('<input type="checkbox" title="Invert collapsed card selections" />');
-    invertCollapsedCards.on("change", () =>
+    invertCollapsedCards.on("change", () => {
       $('.card-toggle').each(() => {
-        $(this).prop('checked', !$(this).prop('checked'));
-      });
-    );
+          $(this).prop('checked', !$(this).prop('checked'));
+        });
+    });
     
     $(selectors.board)
       .parent()
