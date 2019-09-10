@@ -400,6 +400,7 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
     toggleDetails.insertBefore(aging);
   }
 
+  /*
   GM_xmlhttpRequest({
     url:
       "https://raw.githubusercontent.com/walkerrandolphsmith/versionone-teamroom-theme/master/index.css",
@@ -408,14 +409,10 @@ function run(GM_xmlhttpRequest, GM_addStyle, secrets) {
     synchronous: true,
     overrideMimeType: "text/html"
   });
+  */
 
   $(document).arrive(selectors.card, initializeCopyToClipboard);
-  $(document).arrive(selectors.card, initializeCardAging);
-  $(document).arrive(selectors.card, initializeCustomIcons);
-  $(document).arrive(selectors.card, initializeCollapsibleCards);
   $(document).arrive(selectors.sidepanelTabs, intializeBuildStream);
-  $(document).arrive(selectors.board, initializeListView);
   $(document).arrive(selectors.swimlanes, initializeCollapsableSwimlanes);
   $(document).arrive(selectors.columnHeader, initializeCollapsableColumns);
-  $(document).arrive(selectors.board, initalizeMilestoneBanner);
 }
